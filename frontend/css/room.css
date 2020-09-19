@@ -16,13 +16,19 @@
 
 .overlay {
     position: fixed;
+    margin-top: -10vh;
     width: 100vw;
     height: 100vh;
     background-color: rgb(234, 228, 204);
 }
 
 #form {
-    
+    margin-top: 10vh;
+    margin-left: 5vw;
+}
+
+.rendered {
+    margin-bottom: 2.5vh;
 }
 
 html {

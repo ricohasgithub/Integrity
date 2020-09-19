@@ -51,21 +51,52 @@ if (navigator.mediaDevices.getUserMedia) {
 
 function renderFormTitle (title, description) {
     let template = `
-    <div class="card">
+    <div class="card rendered" style="width: 50vw;">
         <div class="card-body">
             <h5 class="card-title">${title}</h5>
             <p class="card-text"${description}</p>
         </div>
     </div>
     `;
-    document.body.innerHTML = template;
+    let widget = document.createElement("div");
+    widget.innerHTML = template;
+    test.appendChild(widget);
 }
 
 renderFormTitle("Hello world!", "whatsup guys welcome to this awesome test!");
 
-function renderWrittenResponse () {
-
+function renderShortAnswer (question) {
+    let template = `
+    <div class="card rendered" style="width: 50vw;">
+        <div class="card-body">
+            <label for="exampleFormControlTextarea1">${question}</label>
+            <input type="email" class="form-control" id="exampleFormControlInput1">
+        </div>
+    </div>
+    `;
+    let widget = document.createElement("div");
+    widget.innerHTML = template;
+    test.appendChild(widget);
 }
+
+renderShortAnswer("Name");
+
+function renderLongAnswer (question) {
+    let template = `
+    <div class="card rendered" style="width: 50vw;">
+        <div class="card-body">
+            <label for="exampleFormControlTextarea1">${question}</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+    </div>
+    `;
+    let widget = document.createElement("div");
+    widget.innerHTML = template;
+    test.appendChild(widget);
+}
+
+renderLongAnswer("What is your favorite color");
+renderLongAnswer("69 lmao");
 
 function renderMultipleChoice () {
 
