@@ -69,6 +69,6 @@ auth.onAuthStateChanged(function(user){
 })
 
 function callWhenGoogleFormAdded(roomId){
-  var createRooms = firebase.database().ref('/rooms/' + roomId).set({test:"1234"});
+  var createRoomwithTestData = firebase.database().ref('/rooms/' + roomId).set({test:"1234"});
     var createStudentData = firebase.database().ref('/rooms/' + roomId + "/" + userId).push({studentData:"student test data"});
 }

@@ -29,6 +29,10 @@
         </script>
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
+        <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-database.js"></script>
+
     </head>
 
     <body>
@@ -65,11 +69,12 @@
                         <div class="card-body">
                             <h5 class="card-title">Create a new test room</h5>
                             <p class="card-text">Drop your google form link, we'll handle the rest</p>
-                            <form>
-                                <input type="link" class="form-control" id="teacher-form" placeholder="google.form.com">
+                            
+                                <input type="link" class="form-control" id="teacher-form" placeholder="google.form.com"><br>
+                                <input type="text" class="form-control" id="room-link" placeholder="Type in a room link">
                                 <br>
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </form>
+                                <button onclick="callWhenGoogleFormAdded()" class="btn btn-primary">Submit</button>
+
                         </div>
                     </div>
                 </div>
