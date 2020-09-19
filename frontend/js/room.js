@@ -291,11 +291,15 @@ function fitModel() {
 }
 
 $('#train').click(function() {
-  fitModel();
-  saveModel();
+  // fitModel();
+  // saveModel();
+  loadModel();
 });
 async function saveModel() {
   const save = await currentModel.save('downloads://my-model');
+}
+async function loadModel() {
+  const currentModel = await tf.loadLayersModel('downloads://..//assets/my-model');
 }
 function moveTarget() {
   if (currentModel == null) {
@@ -303,6 +307,7 @@ function moveTarget() {
   }
   tf.tidy(function() {
     const image = getImage();
+
     const prediction = currentModel.predict(image);
 
     // Convert normalized position back to screen position:
