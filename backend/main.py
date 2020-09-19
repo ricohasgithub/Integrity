@@ -20,6 +20,7 @@ def stream_handler(message):
     print(form_url)
     form_json = get_test_info(form_url)
     print(form_json)
+    
 
 # Get the datastream from the realtime database
 data_stream = firebase_db.child("rooms").child(testID).stream(stream_handler)

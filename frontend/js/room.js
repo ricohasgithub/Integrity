@@ -299,7 +299,7 @@ async function saveModel() {
   const save = await currentModel.save('downloads://my-model');
 }
 async function loadModel() {
-  const currentModel = await tf.loadLayersModel('downloads://..//assets/my-model');
+  const currentModel = await tf.loadLayersModel('file://C:/Users/ricoz/Desktop/Hackathons/Integrity/frontend/js/my-model');
 }
 function moveTarget() {
   if (currentModel == null) {
