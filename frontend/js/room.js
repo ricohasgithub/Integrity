@@ -127,6 +127,9 @@ function trackingLoop() {
   const eyesRect = getEyesRectangle(currentPosition);
   overlayCC.strokeStyle = 'red';
   overlayCC.strokeRect(eyesRect[0], eyesRect[1], eyesRect[2], eyesRect[3]);
+  const faceRect = getFaceRectangle(currentPosition);
+  overlayCC.strokeStyle = 'blue';
+  overlayCC.strokeRect(faceRect[0], faceRect[1], faceRect[2], faceRect[3]);
 
   // The video might internally have a different size, so we need these
   // factors to rescale the eyes rectangle before cropping:
@@ -136,6 +139,8 @@ function trackingLoop() {
   // Crop the eyes from the video and paste them in the eyes canvas:
   const eyesCanvas = $('#eyes')[0];
   const eyesCC = eyesCanvas.getContext('2d');
+  const faceCanvas = $('#face')[0];
+  const faceCC = faceCanvas.getContext('2d');
 
   eyesCC.drawImage(
     video,
@@ -143,6 +148,14 @@ function trackingLoop() {
     eyesRect[2] * resizeFactorX, eyesRect[3] * resizeFactorY,
     0, 0, eyesCanvas.width, eyesCanvas.height
   );
+  faceCC.drawImage(
+    video,
+    faceRect[0] * resizeFactorX, faceRect[1] * resizeFactorY,
+    faceRect[2] * resizeFactorX, faceRect[3] * resizeFactorY,
+    0, 0, eyesCanvas.width, eyesCanvas.height
+  );
+}else{
+  console.log("CHEATING");
 }
 }
 
@@ -151,6 +164,18 @@ function getEyesRectangle(positions) {
   const maxX = positions[28][0] + 5;
   const minY = positions[24][1] - 5;
   const maxY = positions[26][1] + 5;
+
+  const width = maxX - minX;
+  const height = maxY - minY;
+
+  return [minX, minY, width, height];
+}
+
+function getFaceRectangle(positions) {
+  const minX = positions[0][0] - 5;
+  const maxX = positions[14][0] + 5;
+  const minY = positions[20][1] - 20;
+  const maxY = positions[7][1];
 
   const width = maxX - minX;
   const height = maxY - minY;
@@ -175,11 +200,14 @@ document.onmousemove = mouse.handleMouseMove;
 function getImage() {
   // Capture the current image in the eyes canvas as a tensor.
   return tf.tidy(function() {
-    const image = tf.browser.fromPixels($('#eyes')[0]);
+    const eyesimage = tf.browser.fromPixels($('#eyes')[0]);
+    const faceimage = tf.browser.fromPixels($('#face')[0]);
     // Add a batch dimension:
-    const batchedImage = image.expandDims(0);
+    const batchedImage = eyesimage.expandDims(0);
+    const batchedfaceImage = faceimage.expandDims(0);
     // Normalize and return it:
-    return batchedImage.toFloat().div(tf.scalar(127)).sub(tf.scalar(1));
+    console.log(batchedImage);
+    return [batchedImage.toFloat().div(tf.scalar(127)).sub(tf.scalar(1)), batchedfaceImage.toFloat().div(tf.scalar(127)).sub(tf.scalar(1))];
   });
 }
 
@@ -199,7 +227,8 @@ const dataset = {
 function captureExample() {
   // Take the latest image from the eyes canvas and add it to our dataset.
   tf.tidy(function() {
-    const image = getImage();
+    const images = getImage();
+    const image = images[0];
     const mousePos = tf.tensor1d([mouse.x, mouse.y]).expandDims(0);
 
     // Choose whether to add it to training (80%) or validation (20%) set:
@@ -291,23 +320,27 @@ function fitModel() {
 }
 
 $('#train').click(function() {
-   // fitModel();
-   // saveModel();
-  loadModel();
+  //  fitModel();
+  // saveModel();
+   loadModel();
 });
-async function saveModel() {
-  const save = await currentModel.save('downloads://my-model');
-}
+// async function saveModel() {
+//   const save = await currentModel.save('downloads://my-model');
+// }
 async function loadModel() {
-  const currentModel = await tf.loadLayersModel('https://raw.githubusercontent.com/ricozhuthegreat/Integrity/master/frontend/js/my-model.json');
+  currentModel = await tf.loadLayersModel('https://raw.githubusercontent.com/ricozhuthegreat/Integrity/master/frontend/js/my-model.json');
+  console.log(currentModel)
 }
 async function moveTarget() {
+
+  //console.log(currentModel)
   if (currentModel === null || currentModel === undefined) {
-    console.log("Model missing");
+    //console.log("Model missing");
     return;
   }
   tf.tidy(function() {
-    const image = getImage();
+    const images = getImage();
+    const image = images[0];
 
     const prediction = currentModel.predict(image);
 
