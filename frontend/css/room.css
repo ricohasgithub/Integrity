@@ -1,0 +1,30 @@
+
+.camera {
+    margin-top: 2.5%;
+    margin-left: 80%;
+	width: 200px;
+    height: 150px;
+    border-radius: 10px;
+}
+
+#videoElement {
+	width: 200px;
+    height: 150px;
+    border-radius: 10px;
+	background-color: #000;
+}
+
+.overlay {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(234, 228, 204);
+}
+
+#form {
+    
+}
+
+html {
+    background-color: rgb(234, 228, 204);
+}
