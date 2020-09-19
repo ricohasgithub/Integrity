@@ -292,8 +292,11 @@ function fitModel() {
 
 $('#train').click(function() {
   fitModel();
+  saveModel();
 });
-
+async function saveModel() {
+  const save = await currentModel.save('downloads://my-model');
+}
 function moveTarget() {
   if (currentModel == null) {
     return;
