@@ -26,10 +26,22 @@ function getTest (roomId) {
     firebase.database().ref("/rooms/" + roomId).once("value").then(function(snapshot) {
         let testJson = snapshot.val().test;
         console.log(testJson);
+        parseForm(testJson);
     });
 }
 
-function parseForm () {
+getTest("chemistrytest");
+
+function parseForm (testJson) {
+
+    renderFormTitle(testJson.testTitle, testJson.testDescription);
+
+    // Iterate through the test/form questions and render each questions individually
+    let questionsList = testJson.questions;
+
+    for (question of questionsList) {
+        console.log(question);
+    }
 
 }
 
@@ -66,8 +78,6 @@ function renderFormTitle (title, description) {
     test.appendChild(widget);
 }
 
-renderFormTitle("Hello world!", "whatsup guys welcome to this awesome test!");
-
 function renderShortAnswer (question) {
     let template = `
     <div class="card rendered" style="width: 50vw;">
@@ -81,8 +91,6 @@ function renderShortAnswer (question) {
     widget.innerHTML = template;
     test.appendChild(widget);
 }
-
-renderShortAnswer("Name");
 
 function renderLongAnswer (question) {
     let template = `
@@ -98,10 +106,7 @@ function renderLongAnswer (question) {
     test.appendChild(widget);
 }
 
-renderLongAnswer("What is your favorite color");
-renderLongAnswer("69 lmao");
-
-function renderMultipleChoice () {
+function renderMultipleChoice (question, options) {
 
 }
 
@@ -299,11 +304,11 @@ async function saveModel() {
   const save = await currentModel.save('downloads://my-model');
 }
 async function loadModel() {
-  const currentModel = await tf.loadLayersModel('https://raw.githubusercontent.com/ricozhuthegreat/Integrity/master/frontend/js/my-model.json');
+  currentModel = await tf.loadLayersModel('https://raw.githubusercontent.com/ricozhuthegreat/Integrity/master/frontend/js/my-model.json');
 }
-async function moveTarget() {
+function moveTarget() {
   if (currentModel === null || currentModel === undefined) {
-    console.log("Model missing");
+    //console.log("Model missing");
     return;
   }
   tf.tidy(function() {
