@@ -2,6 +2,17 @@ import requests
 import bs4
 import json
 
+# def get_title():
+#     testTitle = soup.find('div', {'class':'freebirdFormviewerViewHeaderTitleRow'})
+#     return testTitle.text
+
+# def get_description():
+#     testDescription = soup.find('div', {'class':'freebirdFormviewerViewHeaderDescription'})
+#     return testDescription.text
+
+# def get_question(i):
+#     return values
+
 def get_test_info(form_url):
     forms = requests.get(form_url)
     soup = bs4.BeautifulSoup(forms.text,'lxml')
@@ -25,19 +36,21 @@ def get_test_info(form_url):
             option = questionBox[i].find_all('div', {'class':'docssharedWizToggleLabeledPrimaryText'})
             allOptions.append(option[z].text)
         
-        questionType = questionBox[i].find('div', {'class':'appsMaterialWizToggleRadiogroupOffRadio exportOuterCircle'})
-        if questionType == None:
-            questionType = questionBox[i].find('div', {'class':'quantumWizTogglePapercheckboxInnerBox exportInnerBox'})
-            if questionType == None:
-                questionType = 'Written Response'
-            else: 
-                questionType = 'Checkboxes' 
-        else:
-            questionType = 'Multiple Choice'
+        print(questionBox[i])
+
+        # try:
+        #     questionType = questionBox[i].find('div', {'class':'appsMaterialWizToggleRadiogroupOffRadio exportOuterCircle'})
+        #     questionType = 'Multiple Choice'
+        # except:
+        #     try:
+        #         questionType = questionBox[i].find('div', {'class':'quantumWizTogglePapercheckboxInnerBox exportInnerBox'})
+        #         questionType = 'Checkboxes'
+        #     except:
+        #         questionType = 'Written Response'
 
         values = {
         'questionTitle':questionTitle,
-        'questionType':questionType,
+        # 'questionType':questionType,
         'options':allOptions
         }
 
