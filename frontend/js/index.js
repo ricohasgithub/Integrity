@@ -23,7 +23,7 @@ function callWhenGoogleFormAdded(){
   console.log("PLS RUN");
   var roomId = document.getElementById("room-link").value;
   var testData = document.getElementById("teacher-form").value;
-  var createRoomwithTestData = firebase.database().ref('/rooms/' + roomId).set({test:testData});
+  var createRoomwithTestData = firebase.database().ref('/rooms/' + roomId).set({url:testData});
       document.getElementById("teacher-prompt").style.visibility = "hidden";
   //var createStudentData = firebase.database().ref('/rooms/' + roomId + "/" + userId).push({studentData:"student test data"});
 }

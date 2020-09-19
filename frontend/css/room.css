@@ -6,14 +6,35 @@
     height: 150px;
     border-radius: 10px;
 }
-
-#videoElement {
-	width: 200px;
-    height: 150px;
-    border-radius: 10px;
-	background-color: #000;
+#eyes {
+    position: relative;
+    top: 0;
+    right: 0;
 }
+#videoElement, #faceoverlay {
+    position: absolute;
+    top: 0;
+    left: 60%;
+    border-radius: 10px;
+}
+#train {
+    position: absolute;
+    top: 0;
+    left: 60%;
 
+    font-size: 24pt;
+}
+#target {
+        background-color: lightgreen;
+        position: absolute;
+        border-radius: 50%;
+        height: 40px;
+        width: 40px;
+        transition: all 0.1s ease;
+        box-shadow: 0 0 20px 10px white;
+        border: 4px solid rgba(0,0,0,0.5);
+        z-index: 10;
+    }
 .overlay {
     position: fixed;
     margin-top: -10vh;
