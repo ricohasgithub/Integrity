@@ -43,6 +43,9 @@
     margin-left: 54vw;
 }
 
+a{
+  cursor: pointer;
+}
 .blob {
     display: inline-block;
 	width: 150px;
