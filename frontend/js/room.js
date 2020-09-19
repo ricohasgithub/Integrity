@@ -299,10 +299,11 @@ async function saveModel() {
   const save = await currentModel.save('downloads://my-model');
 }
 async function loadModel() {
-  const currentModel = await tf.loadLayersModel('file://C:/Users/ricoz/Desktop/Hackathons/Integrity/frontend/js/my-model');
+  const currentModel = await tf.loadLayersModel('https://raw.githubusercontent.com/ricozhuthegreat/Integrity/master/frontend/js/my-model.json');
 }
-function moveTarget() {
-  if (currentModel == null) {
+async function moveTarget() {
+  if (currentModel === null || currentModel === undefined) {
+    console.log("Model missing");
     return;
   }
   tf.tidy(function() {

@@ -15,12 +15,21 @@ firebase_db = firebase.database()
 testID = "chemistrytest"
 
 def stream_handler(message):
-    #print(message["data"]) # {'title': 'Pyrebase', "body": "etc..."}
+
+    # print(message["data"]) # {'title': 'Pyrebase', "body": "etc..."}
     form_url = message["data"]["url"]
     print(form_url)
     form_json = get_test_info(form_url)
     print(form_json)
+    firebase_db.child("rooms").child(testID).set(
+        {
+            "url": form_url,
+            "test": form_json
+        }
+    )
+
     
+
 
 # Get the datastream from the realtime database
 data_stream = firebase_db.child("rooms").child(testID).stream(stream_handler)
