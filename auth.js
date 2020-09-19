@@ -59,16 +59,12 @@ function signOut(){
 auth.onAuthStateChanged(function(user){
   if(user){
     alert("Signed In @ " + user.email);
-    userId = user.uid;
-    callWhenGoogleFormAdded('abc123');
-
   //  window.location.href="whatever.html";
   } else {
     alert("No active user");
   }
 })
 
-function callWhenGoogleFormAdded(roomId){
-  var createRooms = firebase.database().ref('/rooms/' + roomId).set({test:"1234"});
-    var createStudentData = firebase.database().ref('/rooms/' + roomId + "/" + userId).push({studentData:"student test data"});
-}
+ userId = user.uid;
+var database = firebase.database();
+var createRooms = firebase.database().ref(userId + 'rooms/').push({test: "1234"};
