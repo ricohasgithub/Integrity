@@ -1,8 +1,35 @@
 
-.brandImage {
-    width: 6vh;
+.navbar-opcaity {
+    background: rgba(255, 255, 255, 0.3);
 }
 
-p {
+.brandImage {
+    margin-left: 3vw;
+    width: 3vw;
+}
+
+#master-head {
+    width: 100vw;
+    height: 100vh;
+}
+
+#master-container {
+    margin-top: 37.5vh;
+    margin-left: 5vw;
+}
+
+#master-title {
+    font-size: 6vw;
+    font-weight: 100;
+    font-family: 'Lato', sans-serif;
+}
+
+#master-subtitle {
+    font-size: 3vw;
+    font-weight: 100;
+    font-family: 'Lato', sans-serif;
+}
+
+h1, h2, p {
     font-family: 'Lato', sans-serif;
 }
