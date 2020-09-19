@@ -7,6 +7,9 @@ soup = bs4.BeautifulSoup(forms.text,'lxml')
 testTitle = soup.find('div', {'class':'freebirdFormviewerViewHeaderTitleRow'})
 print(testTitle.text)
 
+testDecription = soup.find('div', {'class':'freebirdFormviewerViewHeaderDescription'})
+print(testDecription.text)
+
 questionsNum = soup.find_all('div', {'class':'freebirdFormviewerComponentsQuestionBaseTitle exportItemTitle freebirdCustomFont'})
 
 for i in range(len(questionsNum)):
