@@ -291,8 +291,8 @@ function fitModel() {
 }
 
 $('#train').click(function() {
-  // fitModel();
-  // saveModel();
+   // fitModel();
+   // saveModel();
   loadModel();
 });
 async function saveModel() {
