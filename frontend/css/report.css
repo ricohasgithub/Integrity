@@ -1,6 +1,6 @@
 
 .overlay {
-  
+    position: absolute;
     margin-top: 10vh;
     margin-left: 10vh;
     width: 120vw;
@@ -26,4 +26,5 @@
 
 html {
     background-color: rgb(234, 228, 204);
+    overflow-x: hidden;
 }
