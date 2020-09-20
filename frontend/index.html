@@ -71,9 +71,13 @@
                             <p class="card-text">Drop your google form link, we'll handle the rest</p>
 
                                 <input type="link" class="form-control" id="teacher-form" placeholder="google.form.com"><br>
-                                <input type="text" class="form-control" id="room-link" placeholder="Type in a room link">
-                                <br>
-                                <button onclick="callWhenGoogleFormAdded()" class="btn btn-primary">Submit</button>
+                                <input type="text" class="form-control" id="room-link" placeholder="Type in a room link"><br>
+                                
+                                <label class = "time-label" for="appt">Test end time:</label>
+                                <input type="time" id="time-limit" name="time=limit" min="09:00" max="18:00" required><br>
+                                
+                                <br><button onclick="callWhenGoogleFormAdded()" class="btn btn-primary">Submit</button>
+                                <button onclick="closeOverlay()" class="back">Back</button>
 
                         </div>
                     </div>
@@ -88,10 +92,11 @@
                             <h5 class="card-title">Join test room</h5>
                             <p class="card-text">Please enter the room code that your teacher provided</p>
 
-                                <input type="link" class="form-control" id="room-link" placeholder="h3ll0_w0rld">
+                                <input type="link" class="form-control" id="room-link" placeholder="Enter room code"><br>
                                 <input type="text" class="form-control" id="student-name" placeholder="Enter your name">
                                 <br>
                                 <button onclick="studentJoining()" type="submit" class="btn btn-primary">Submit</button>
+                                <button onclick="closeOverlay()" class="back">Back</button>
 
                         </div>
                     </div>

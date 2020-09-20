@@ -10,7 +10,7 @@ var firebaseConfig = {
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-
+ 
 
 document.getElementById("teacher").onclick = () => {
 
@@ -36,4 +36,13 @@ document.getElementById("student").onclick = () => {
 
     document.getElementById("student-prompt").style.visibility = "visible";
 
+}
+
+function closeOverlay(){
+  var overlay = $('.overlay'),
+    close = $('<div class="back">back</div>');
+
+  $(overlay, close).on('click', function () {
+    overlay.fadeOut();
+});
 }
