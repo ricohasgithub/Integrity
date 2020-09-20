@@ -408,6 +408,7 @@ async function moveTarget() {
     return;
   }
   tf.tidy(function() {
+
     const images = getImage();
      image = images[0];
 
@@ -421,8 +422,14 @@ async function moveTarget() {
     prediction.data().then(prediction => {
       const x = ((prediction[0] + 1) / 2) * ($(window).width() - targetWidth);
       const y = ((prediction[1] + 1) / 2) * ($(window).height() - targetHeight);
-      console.log(x, y);
+      //console.log(x, y);
       coordinates.push([x, y]);
+
+      console.log(document.elementFromPoint(x, y));
+
+    //   if (document.elementFromPoint(x, y).className !== "overlay") {
+    //     document.elementFromPoint(x, y).classList.add("highlight");
+    //   }
 
       // Move target there:
       const $target = $('#target');

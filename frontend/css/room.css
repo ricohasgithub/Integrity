@@ -2,9 +2,9 @@
 .camera {
     position: absolute;
     margin-top: 10vh;
-    margin-left: 70vw;
-	width: 200px;
-    height: 150px;
+    margin-left: 40vw;
+	width: 400px;
+    height: 300px;
     border-radius: 10px;
 }
 #eyes, #face {
@@ -27,14 +27,15 @@
     font-size: 24pt;
 }
 #target {
-        background-color: lightgreen;
+        /* background-color: lightgreen; */
         position: absolute;
-        border-radius: 50%;
-        height: 40px;
-        width: 40px;
+        /* border-radius: 50%; */
+        height: 30px;
+        width: 30px;
         transition: all 0.1s ease;
-        box-shadow: 0 0 20px 10px white;
-        border: 4px solid rgba(0,0,0,0.5);
+        /* box-shadow: 0 0 20px 10px white; */
+        /* border: 4px solid rgba(0,0,0,0.5); */
+        background-image: url("https://www.flaticon.com/svg/static/icons/svg/565/565654.svg");
         z-index: 10;
     }
 .overlay {
@@ -52,6 +53,11 @@
 
 .rendered {
     margin-bottom: 2.5vh;
+}
+
+.highlight {
+    background-color: #bcd5eb !important;
+    outline: 1px solid #5166bb !important;
 }
 
 html {
