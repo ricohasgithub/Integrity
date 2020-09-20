@@ -82,6 +82,7 @@
     margin-left: 79vw;
     width: 200px;
     height: 152px;
+    border-radius: 10px;
 }
 
 #timer {
@@ -100,4 +101,11 @@
 
 html {
     background-color: rgb(234, 228, 204);
+}
+
+#accent {
+    margin-left: 70vh;
+    margin-top: 15vh;
+    max-width: 70%;
+    height:auto;
 }
