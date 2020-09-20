@@ -83,7 +83,7 @@ function renderFormTitle (title, description) {
     let template = `
     <img class="header-image" src="./assets/favicon.png"></img>
     <div class = "header-title">${title}</div>
-    <div class = "header-subtitle">${description}</div><br>
+    <div class = "header-subtitle">${description}</div>
     `;
     let widget = document.createElement("div");
     widget.innerHTML = template;
@@ -213,9 +213,8 @@ let countdown = setInterval(function() {
   document.getElementById("timer").innerHTML = minutes + "m " + seconds + "s ";
 
   // If the count down is finished, write some text
-  if (distance < 0) {
-    clearInterval(x);
-    document.getElementById("timer").innerHTML = "EXPIRED";
+  if (distance <= 0) {
+    document.getElementById("timer").innerHTML = "00:00";
   }
 }, 1000);
 
@@ -521,15 +520,19 @@ async function checkImage(){
    }
   // push eye coordinates to firebase to make heatmap or something;
 }
+
+let ttime = 0;
+
 async function checkCheat() {
   frameCheatPercent = frameCheat/notFrameCheat*100;
   turnCheatPercent = turnCheat/notTurnCheat*100;
   console.log("%1: " + frameCheatPercent)
   console.log("%2: " + turnCheatPercent)
   console.log("%3: " + lightCheat)
-  var createRoomwithTestData = database.ref('/users/' + "joey" + "/" + "chemistrytest").set({frameCheat:frameCheatPercent,turnCheat:turnCheatPercent,lightCheat:lightCheat});
+  ttime += 10;
+  var createRoomwithTestData = database.ref('/rooms/' + "chemistrytest" + "/" + "students/Rico"+"/"+ttime).set({time: ttime, name:"Rico",frameCheat:frameCheatPercent,turnCheat:turnCheatPercent,lightCheat:lightCheat});
 }
 setInterval(checkImage, 5000);
-setInterval(checkCheat, 30000);
+setInterval(checkCheat, 10000);
 setInterval(moveTarget, 100);
 
