@@ -8,6 +8,7 @@
     border-radius: 10px;
 }
 #eyes, #face {
+    display:none;
     position: relative;
     top: 10px;
     right: 0;
