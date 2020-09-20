@@ -19,7 +19,7 @@ firebase.initializeApp(firebaseConfig);
 let database = firebase.database();
 
 let report = document.getElementById("report");
-
+var coordinates = [];
 async function getStudentsFromRoom (roomId) {
     let templateHead = `
     <div class="card rendered" style="width: 50vw;">
@@ -37,6 +37,12 @@ async function getStudentsFromRoom (roomId) {
     await firebase.database().ref("/rooms/" + roomId + "/students/Rico/").once("value").then(function(snapshot) {
         snapshot.forEach(function(childNodes){
             console.log(childNodes);
+            if(!(childNodes.val().coordinates === undefined)){
+                  coordinates.push(childNodes.val().coordinates);
+            }
+
+
+          //  console.log(coordinates);
             templateHead += `
             <tr>
             <th scope="row">${childNodes.val().time}</th>
@@ -48,7 +54,7 @@ async function getStudentsFromRoom (roomId) {
             console.log(childNodes.val().name);
             console.log(childNodes.val().turnCheat);
         });
-    });
+    })
 
     let templateTail =
     `</tbody>
@@ -68,3 +74,28 @@ function renderStudentReport (data) {
 }
 
 getStudentsFromRoom("chemistrytest");
+// var counter = 0;
+// function renderBubbleChart(){
+//   console.log(coordinates)
+//   var options = {
+//   chart: {
+//     type: 'bubble',
+//     height: 350,
+//     width: 350,
+//   },
+//   series: [{
+//     name: 'Eye Tracking',
+//     data: coordinates
+//   }],
+// 
+// }
+//
+//
+//
+//
+// var chart = new ApexCharts(document.querySelector("#chart"), options);
+//
+// chart.render();
+// counter++;
+// }
+// setInterval(renderBubbleChart, 5000);

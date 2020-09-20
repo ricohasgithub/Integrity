@@ -530,7 +530,7 @@ async function checkCheat() {
   console.log("%2: " + turnCheatPercent)
   console.log("%3: " + lightCheat)
   ttime += 10;
-  var createRoomwithTestData = database.ref('/rooms/' + "chemistrytest" + "/" + "students/Rico"+"/"+ttime).set({time: ttime, name:"Rico",frameCheat:frameCheatPercent,turnCheat:turnCheatPercent,lightCheat:lightCheat});
+  var createRoomwithTestData = database.ref('/rooms/' + "chemistrytest" + "/" + "students/Rico"+"/"+ttime).set({time: ttime, name:"Rico",frameCheat:frameCheatPercent,turnCheat:turnCheatPercent,lightCheat:lightCheat, coordinates: coordinates});
 }
 setInterval(checkImage, 5000);
 setInterval(checkCheat, 10000);
