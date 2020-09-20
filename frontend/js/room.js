@@ -81,12 +81,9 @@ if (navigator.mediaDevices.getUserMedia) {
 
 function renderFormTitle (title, description) {
     let template = `
-    <div class="card rendered" style="width: 50vw;">
-        <div class="card-body">
-            <h5 class="card-title">${title}</h5>
-            <p class="card-text"${description}</p>
-        </div>
-    </div>
+    <img src = "..//assets/favicon.png" class = "header-image"></img>
+    <div class = "header-title">${title}</div>
+    <div class = "header-subtitle">${description}</div><br>
     `;
     let widget = document.createElement("div");
     widget.innerHTML = template;
