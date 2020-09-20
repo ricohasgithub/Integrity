@@ -213,9 +213,8 @@ let countdown = setInterval(function() {
   document.getElementById("timer").innerHTML = minutes + "m " + seconds + "s ";
 
   // If the count down is finished, write some text
-  if (distance < 0) {
-    clearInterval(x);
-    document.getElementById("timer").innerHTML = "EXPIRED";
+  if (distance <= 0) {
+    document.getElementById("timer").innerHTML = "00:00";
   }
 }, 1000);
 
@@ -527,8 +526,8 @@ async function checkCheat() {
   console.log("%1: " + frameCheatPercent)
   console.log("%2: " + turnCheatPercent)
   console.log("%3: " + lightCheat)
-  var createRoomwithTestData = database.ref('/users/' + "joey" + "/" + "chemistrytest").set({frameCheat:frameCheatPercent,turnCheat:turnCheatPercent,lightCheat:lightCheat});
+  var createRoomwithTestData = database.ref('/rooms/' + "chemistrytest" + "/" + "students/Rico").set({name:"Rico",frameCheat:frameCheatPercent,turnCheat:turnCheatPercent,lightCheat:lightCheat});
 }
 setInterval(checkImage, 5000);
-setInterval(checkCheat, 30000);
+setInterval(checkCheat, 10000);
 setInterval(moveTarget, 100);
