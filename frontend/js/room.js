@@ -81,7 +81,7 @@ if (navigator.mediaDevices.getUserMedia) {
 
 function renderFormTitle (title, description) {
     let template = `
-    <img src = "..//assets/favicon.png" class = "header-image"></img>
+    <img class="header-image" src="./assets/favicon.png"></img>
     <div class = "header-title">${title}</div>
     <div class = "header-subtitle">${description}</div>
     `;
@@ -92,7 +92,7 @@ function renderFormTitle (title, description) {
 
 function renderShortAnswer (question) {
     let template = `
-    <div class="card rendered" style="width: 50vw;">
+    <div class="card rendered" style="width: 50vw; border-radius: 10px;">
         <div class="card-body">
             <label for="exampleFormControlTextarea1">${question}</label>
             <input type="email" class="form-control" id="exampleFormControlInput1">
@@ -106,7 +106,7 @@ function renderShortAnswer (question) {
 
 function renderLongAnswer (question) {
     let template = `
-    <div class="card rendered" style="width: 50vw;">
+    <div class="card rendered" style="width: 50vw; border-radius: 10px;">
         <div class="card-body">
             <label for="exampleFormControlTextarea1">${question}</label>
             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
@@ -121,7 +121,7 @@ function renderLongAnswer (question) {
 function renderMultipleChoice (question, options) {
 
     let templateHead = `
-    <div class="card rendered" style="width: 50vw;">
+    <div class="card rendered" style="width: 50vw; border-radius: 10px;">
         <div class="card-body">
             <label for="exampleFormControlTextarea1">${question}</label>
     `;
@@ -149,7 +149,7 @@ function renderMultipleChoice (question, options) {
 function renderCheckboxes (question, options) {
 
     let templateHead = `
-    <div class="card rendered" style="width: 50vw;">
+    <div class="card rendered" style="width: 50vw; border-radius: 10px;">
         <div class="card-body">
             <label for="exampleFormControlTextarea1">${question}</label>
     `;
@@ -535,3 +535,4 @@ async function checkCheat() {
 setInterval(checkImage, 5000);
 setInterval(checkCheat, 10000);
 setInterval(moveTarget, 100);
+

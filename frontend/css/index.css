@@ -101,6 +101,7 @@ html {
     background-color: rgb(234, 228, 204);
 }
 
-h1, h2, p {
+h1, h2, p, label {
     font-family: 'Lato', sans-serif;
 }
+

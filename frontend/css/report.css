@@ -13,6 +13,17 @@
     margin-top: 20vh;
 }
 
+.header-image {
+    position: absolute;
+    width: 8vh;
+    margin-top: 0vh;
+}
+
+.header-title {
+    position: relative;
+    margin-left: 15vh;
+}
+
 html {
     background-color: rgb(234, 228, 204);
 }
