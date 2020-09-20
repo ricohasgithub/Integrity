@@ -28,8 +28,5 @@ def stream_handler(message):
         }
     )
 
-    
-
-
 # Get the datastream from the realtime database
 data_stream = firebase_db.child("rooms").child(testID).stream(stream_handler)

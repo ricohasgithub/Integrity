@@ -41,6 +41,14 @@ function parseForm (testJson) {
 
     for (question of questionsList) {
         console.log(question);
+        let questionType = question.questionType;
+        if (questionType === "Multiple Choice") {
+            renderMultipleChoice(question.questionTitle, question.options);
+        } else if (questionType === "Written Response") {
+            renderLongAnswer(question.questionTitle);
+        } else if (questionType === "Checkboxes") {
+            renderCheckboxes(question.questionTitle, question.options);
+        }
     }
 
 }
@@ -108,9 +116,57 @@ function renderLongAnswer (question) {
 
 function renderMultipleChoice (question, options) {
 
+    let templateHead = `
+    <div class="card rendered" style="width: 50vw;">
+        <div class="card-body">
+            <label for="exampleFormControlTextarea1">${question}</label>
+    `;
+
+    let templateTail = 
+    `</div>
+    </div>`
+
+    for (option of options) {
+        templateHead += `<div class="form-check">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios">
+            <label class="form-check-label" for="exampleRadios">${option}</label>
+        </div>`;
+    }
+
+    let template = templateHead + templateTail;
+    console.log(template);
+
+    let widget = document.createElement("div");
+    widget.innerHTML = template;
+    test.appendChild(widget);
+
 }
 
-function renderCheckboxes () {
+function renderCheckboxes (question, options) {
+
+    let templateHead = `
+    <div class="card rendered" style="width: 50vw;">
+        <div class="card-body">
+            <label for="exampleFormControlTextarea1">${question}</label>
+    `;
+
+    let templateTail = 
+    `</div>
+    </div>`
+
+    for (option of options) {
+        templateHead += `<div class="form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">${option}</label>
+        </div>`;
+    }
+
+    let template = templateHead + templateTail;
+    console.log(template);
+
+    let widget = document.createElement("div");
+    widget.innerHTML = template;
+    test.appendChild(widget);
 
 }
 
