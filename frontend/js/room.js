@@ -159,6 +159,10 @@ function trackingLoop() {
     faceRect[2] * resizeFactorX, faceRect[3] * resizeFactorY,
     0, 0, eyesCanvas.width, eyesCanvas.height
   );
+// cheating detection for turning head left or right
+  if(eyesRect[0]-faceRect[0] < (faceRect[2]/10) || (faceRect[0]+faceRect[2]) - (eyesRect[0]+eyesRect[2]) < (faceRect[2]/10) ){
+    console.log("CHEATING" + faceRect[2]);
+  }
 }else{
   console.log("CHEATING");
 }
@@ -211,7 +215,7 @@ function getImage() {
     const batchedImage = eyesimage.expandDims(0);
     const batchedfaceImage = faceimage.expandDims(0);
     // Normalize and return it:
-    console.log(batchedImage);
+    //console.log(batchedImage);
     return [batchedImage.toFloat().div(tf.scalar(127)).sub(tf.scalar(1)), batchedfaceImage.toFloat().div(tf.scalar(127)).sub(tf.scalar(1))];
   });
 }
@@ -336,6 +340,8 @@ async function loadModel() {
   currentModel = await tf.loadLayersModel('https://raw.githubusercontent.com/ricozhuthegreat/Integrity/master/frontend/js/my-model.json');
   console.log(currentModel)
 }
+
+let coordinates = [];
 async function moveTarget() {
 
   //console.log(currentModel)
@@ -345,7 +351,7 @@ async function moveTarget() {
   }
   tf.tidy(function() {
     const images = getImage();
-    const image = images[0];
+     image = images[0];
 
     const prediction = currentModel.predict(image);
 
@@ -357,6 +363,8 @@ async function moveTarget() {
     prediction.data().then(prediction => {
       const x = ((prediction[0] + 1) / 2) * ($(window).width() - targetWidth);
       const y = ((prediction[1] + 1) / 2) * ($(window).height() - targetHeight);
+      console.log(x, y);
+      coordinates.push([x, y]);
 
       // Move target there:
       const $target = $('#target');
@@ -365,5 +373,20 @@ async function moveTarget() {
     });
   });
 }
-
+// async function checkImage(){
+//   var images = getImage();
+//   var  image = images[1];
+//   var newimage = [];
+// console.log(image);
+//   for (var x = 0; x < image[0][0].length; x++){
+//     for (var y = 0; y < image[0][x][y].length; y++){
+//       var gray = 0.3*image[0][x][y][0] + 0.59*image[0][x][y][1] + 0.11*image[0][x][y][2];
+//       newimage[x][y]= gray;
+//       console.log(newimage);
+//     }
+//   }
+//
+//   // push eye coordinates to firebase to make heatmap or something;
+// }
+// setTimeout(checkImage, 5000);
 setInterval(moveTarget, 100);
