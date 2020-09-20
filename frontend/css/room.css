@@ -9,7 +9,7 @@
 }
 #eyes, #face {
     position: relative;
-    top: 0;
+    top: 10px;
     right: 0;
     z-index:-1;
 }
@@ -40,7 +40,7 @@
     }
 .overlay {
     position: fixed;
-    margin-top: -10vh;
+    margin-top: -10.5vh;
     width: 100vw;
     height: 100vh;
     background-color: rgb(234, 228, 204);
@@ -58,6 +58,18 @@
 .highlight {
     background-color: #bcd5eb !important;
     outline: 1px solid #5166bb !important;
+}
+
+.studentPrompt {
+    position: absolute;
+    margin-top: 10vh;
+    margin-left: 79vw;
+    width: 200px;
+    height: 152px;
+}
+
+#timer {
+    font-size: 25px;
 }
 
 html {
