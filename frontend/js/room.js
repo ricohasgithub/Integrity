@@ -18,6 +18,11 @@ let firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 // Initialize the database
 let database = firebase.database();
+var frameCheat = 0;
+var notFrameCheat = 0;
+var turnCheat = 0;
+var notTurnCheat = 0;
+var lightCheat = 0;
 
 // Retrieve the DOM element with the form ID for innerHTML rendering
 let test = document.getElementById("form");
@@ -219,10 +224,15 @@ function trackingLoop() {
   );
 // cheating detection for turning head left or right
   if(eyesRect[0]-faceRect[0] < (faceRect[2]/10) || (faceRect[0]+faceRect[2]) - (eyesRect[0]+eyesRect[2]) < (faceRect[2]/10) ){
-    console.log("CHEATING" + faceRect[2]);
+    console.log("CHEATING");
+    turnCheat++;
+  } else {
+    notTurnCheat++;
   }
+  notFrameCheat++;
 }else{
   console.log("CHEATING");
+  frameCheat++;
 }
 }
 
@@ -425,7 +435,7 @@ async function moveTarget() {
       //console.log(x, y);
       coordinates.push([x, y]);
 
-      console.log(document.elementFromPoint(x, y));
+    //  console.log(document.elementFromPoint(x, y));
 
     //   if (document.elementFromPoint(x, y).className !== "overlay") {
     //     document.elementFromPoint(x, y).classList.add("highlight");
@@ -438,26 +448,43 @@ async function moveTarget() {
     });
   });
 }
+var luminances = [];
 async function checkImage(){
   var c = document.getElementById("face");
   var ctx = c.getContext("2d");
   var imgData = ctx.getImageData(0, 0, 200, 150);
-   console.log(imgData);
+  var luminance = [];
+  var sum = 0;
+  // console.log(imgData);
   for(var y = 0; y < imgData.height; y++){
        for(var x = 0; x < imgData.width; x++){
            var i = (y * 4) * imgData.width + x * 4;
-           var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3;
-           imgData.data[i] = avg;
-           imgData.data[i + 1] = avg;
-           imgData.data[i + 2] = avg;
+           var avg = (0.2126*imgData.data[i] + 0.7152*imgData.data[i + 1] + 0.0722*imgData.data[i + 2]) / 3;
+           luminance.push(avg);
        }
    }
-   ctx.putImageData(imgData, 0, 0, 0, 0, imgData.width, imgData.height);
-   console.log(imgData);
-   return c.toDataURL()
+   for(var i = 0; i < luminance.length; i++){
+     sum += luminance[i];
+   }
+   var average = sum/luminance.length;
+   console.log("luminosity " + average);
+
+   luminances.push(average);
+
+   if(Math.abs(luminances[luminances.length-2] - average) > 3){
+     console.log("CHEATING");
+     lightCheat++;
+   }
   // push eye coordinates to firebase to make heatmap or something;
 }
-setTimeout(checkImage, 5000);
-
+async function checkCheat() {
+  frameCheatPercent = frameCheat/notFrameCheat*100;
+  turnCheatPercent = turnCheat/notTurnCheat*100;
+  console.log("%1: " + frameCheatPercent)
+  console.log("%2: " + turnCheatPercent)
+  console.log("%2: " + lightCheat)
+}
+setInterval(checkImage, 5000);
+setInterval(checkCheat, 30000);
 
 setInterval(moveTarget, 100);

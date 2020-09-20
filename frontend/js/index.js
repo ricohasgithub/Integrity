@@ -27,6 +27,11 @@ function callWhenGoogleFormAdded(){
       document.getElementById("teacher-prompt").style.visibility = "hidden";
   //var createStudentData = firebase.database().ref('/rooms/' + roomId + "/" + userId).push({studentData:"student test data"});
 }
+function studentJoining(){
+  var roomId = document.getElementById("room-link").value;
+  var studentName = document.getElementById("student-name").value;
+    var createRoomwithTestData = firebase.database().ref('/users/' + studentName + "/" + roomId).set({cheatscore:"fill in with cheat score"});
+}
 document.getElementById("student").onclick = () => {
 
     document.getElementById("student-prompt").style.visibility = "visible";
