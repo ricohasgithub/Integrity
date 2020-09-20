@@ -500,7 +500,7 @@ async function checkImage(){
 
    luminances.push(average);
 
-   if(Math.abs(luminances[luminances.length-2] - average) > 3){
+   if(Math.abs(luminances[luminances.length-2] - average) > 0.05){
      console.log("CHEATING");
      lightCheat++;
    }
@@ -511,7 +511,8 @@ async function checkCheat() {
   turnCheatPercent = turnCheat/notTurnCheat*100;
   console.log("%1: " + frameCheatPercent)
   console.log("%2: " + turnCheatPercent)
-  console.log("%2: " + lightCheat)
+  console.log("%3: " + lightCheat)
+  var createRoomwithTestData = database.ref('/users/' + "joey" + "/" + "chemistrytest").set({frameCheat:frameCheatPercent,turnCheat:turnCheatPercent,lightCheat:lightCheat});
 }
 setInterval(checkImage, 5000);
 setInterval(checkCheat, 30000);
