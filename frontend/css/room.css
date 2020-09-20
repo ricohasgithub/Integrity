@@ -72,6 +72,16 @@
     font-size: 25px;
 }
 
+#closeCamera {
+    background-color: #d9534f;
+    margin-top: 4vh;
+    width: 160px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+}
+
 html {
     background-color: rgb(234, 228, 204);
 }
