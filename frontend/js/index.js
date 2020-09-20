@@ -30,7 +30,8 @@ function callWhenGoogleFormAdded(){
 function studentJoining(){
   var roomId = document.getElementById("room-link").value;
   var studentName = document.getElementById("student-name").value;
-    var createRoomwithTestData = firebase.database().ref('/users/' + studentName + "/" + roomId).set({cheatscore:"fill in with cheat score"});
+    var createRoomwithTestData = firebase.database().ref('/rooms/' + roomId + "/users/" + studentName).set({cheatscore:"fill in with cheat score"});
+    window.location.href = "..//room.html";
 }
 document.getElementById("student").onclick = () => {
 

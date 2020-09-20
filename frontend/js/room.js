@@ -83,7 +83,7 @@ function renderFormTitle (title, description) {
     let template = `
     <img src = "..//assets/favicon.png" class = "header-image"></img>
     <div class = "header-title">${title}</div>
-    <div class = "header-subtitle">${description}</div><br>
+    <div class = "header-subtitle">${description}</div>
     `;
     let widget = document.createElement("div");
     widget.innerHTML = template;
