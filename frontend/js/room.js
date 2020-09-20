@@ -124,7 +124,7 @@ function renderMultipleChoice (question, options) {
             <label for="exampleFormControlTextarea1">${question}</label>
     `;
 
-    let templateTail = 
+    let templateTail =
     `</div>
     </div>`
 
@@ -152,7 +152,7 @@ function renderCheckboxes (question, options) {
             <label for="exampleFormControlTextarea1">${question}</label>
     `;
 
-    let templateTail = 
+    let templateTail =
     `</div>
     </div>`
 
@@ -215,7 +215,7 @@ function trackingLoop() {
     video,
     faceRect[0] * resizeFactorX, faceRect[1] * resizeFactorY,
     faceRect[2] * resizeFactorX, faceRect[3] * resizeFactorY,
-    0, 0, eyesCanvas.width, eyesCanvas.height
+    0, 0, faceCanvas.width, faceCanvas.height
   );
 // cheating detection for turning head left or right
   if(eyesRect[0]-faceRect[0] < (faceRect[2]/10) || (faceRect[0]+faceRect[2]) - (eyesRect[0]+eyesRect[2]) < (faceRect[2]/10) ){
@@ -438,20 +438,26 @@ async function moveTarget() {
     });
   });
 }
-// async function checkImage(){
-//   var images = getImage();
-//   var  image = images[1];
-//   var newimage = [];
-// console.log(image);
-//   for (var x = 0; x < image[0][0].length; x++){
-//     for (var y = 0; y < image[0][x][y].length; y++){
-//       var gray = 0.3*image[0][x][y][0] + 0.59*image[0][x][y][1] + 0.11*image[0][x][y][2];
-//       newimage[x][y]= gray;
-//       console.log(newimage);
-//     }
-//   }
-//
-//   // push eye coordinates to firebase to make heatmap or something;
-// }
-// setTimeout(checkImage, 5000);
+async function checkImage(){
+  var c = document.getElementById("face");
+  var ctx = c.getContext("2d");
+  var imgData = ctx.getImageData(0, 0, 200, 150);
+   console.log(imgData);
+  for(var y = 0; y < imgData.height; y++){
+       for(var x = 0; x < imgData.width; x++){
+           var i = (y * 4) * imgData.width + x * 4;
+           var avg = (imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2]) / 3;
+           imgData.data[i] = avg;
+           imgData.data[i + 1] = avg;
+           imgData.data[i + 2] = avg;
+       }
+   }
+   ctx.putImageData(imgData, 0, 0, 0, 0, imgData.width, imgData.height);
+   console.log(imgData);
+   return c.toDataURL()
+  // push eye coordinates to firebase to make heatmap or something;
+}
+setTimeout(checkImage, 5000);
+
+
 setInterval(moveTarget, 100);
