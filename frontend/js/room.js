@@ -520,13 +520,17 @@ async function checkImage(){
    }
   // push eye coordinates to firebase to make heatmap or something;
 }
+
+let ttime = 0;
+
 async function checkCheat() {
   frameCheatPercent = frameCheat/notFrameCheat*100;
   turnCheatPercent = turnCheat/notTurnCheat*100;
   console.log("%1: " + frameCheatPercent)
   console.log("%2: " + turnCheatPercent)
   console.log("%3: " + lightCheat)
-  var createRoomwithTestData = database.ref('/rooms/' + "chemistrytest" + "/" + "students/Rico").set({name:"Rico",frameCheat:frameCheatPercent,turnCheat:turnCheatPercent,lightCheat:lightCheat});
+  ttime += 10;
+  var createRoomwithTestData = database.ref('/rooms/' + "chemistrytest" + "/" + "students/Rico"+"/"+ttime).set({time: ttime, name:"Rico",frameCheat:frameCheatPercent,turnCheat:turnCheatPercent,lightCheat:lightCheat});
 }
 setInterval(checkImage, 5000);
 setInterval(checkCheat, 10000);

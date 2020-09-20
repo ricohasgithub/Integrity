@@ -1,0 +1,18 @@
+
+.overlay {
+    position: fixed;
+    margin-top: 10vh;
+    margin-left: 10vh;
+    width: 120vw;
+    height: 130vh;
+    background-color: rgb(234, 228, 204);
+}
+
+.report {
+    position: relative;
+    margin-top: 20vh;
+}
+
+html {
+    background-color: rgb(234, 228, 204);
+}

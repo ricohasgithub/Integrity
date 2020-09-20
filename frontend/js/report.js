@@ -18,18 +18,53 @@ firebase.initializeApp(firebaseConfig);
 // Initialize the database
 let database = firebase.database();
 
-function getStudentsFromRoom (roomId) {
-    firebase.database().ref("/rooms/" + roomId + "/students/").once("value").then(function(snapshot) {
-        let students = snapshot.val();
-        console.log(students);
-        for (student of students) {
-            
-        }
+let report = document.getElementById("report");
+
+async function getStudentsFromRoom (roomId) {
+    let templateHead = `
+    <div class="card rendered" style="width: 50vw;">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Rico's Report</th>
+                <th scope="col">% Absent</th>
+                <th scope="col">% Away</th>
+                <th scope="col">Face Illumination</th>
+            </tr>
+            </thead>
+            <tbody>`;
+
+    await firebase.database().ref("/rooms/" + roomId + "/students/Rico/").once("value").then(function(snapshot) {
+        snapshot.forEach(function(childNodes){
+            console.log(childNodes);
+            templateHead += `
+            <tr>
+            <th scope="row">${childNodes.val().time}</th>
+            <td>${childNodes.val().frameCheat}</td>
+            <td>${childNodes.val().turnCheat}</td>
+            <td>${childNodes.val().lightCheat}</td>
+            </tr>`;
+            console.log(childNodes.val().time);
+            console.log(childNodes.val().name);
+            console.log(childNodes.val().turnCheat);
+        });
     });
+
+    let templateTail =
+    `</tbody>
+    </table>
+    </div>
+    `;
+
+    let template = templateHead + templateTail;
+    console.log(template);
+
+    let widget = document.createElement("div");
+    widget.innerHTML = template;
+    report.appendChild(widget);
 }
 
-function renderStudentReport (name, cheatData) {
-
+function renderStudentReport (data) {
 }
 
 getStudentsFromRoom("chemistrytest");
