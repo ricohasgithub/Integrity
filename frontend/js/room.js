@@ -44,6 +44,8 @@ function parseForm (testJson) {
         let questionType = question.questionType;
         if (questionType === "Multiple Choice") {
             renderMultipleChoice(question.questionTitle, question.options);
+        } else if (questionType === "Short Answer") {
+            renderShortAnswer(question.questionTitle);
         } else if (questionType === "Written Response") {
             renderLongAnswer(question.questionTitle);
         } else if (questionType === "Checkboxes") {
@@ -178,7 +180,7 @@ function trackingLoop() {
   requestAnimationFrame(trackingLoop);
 
   let currentPosition = ctrack.getCurrentPosition();
-  overlayCC.clearRect(0, 0, 400, 300);
+  overlayCC.clearRect(0, 0, 200, 150);
 
   if (currentPosition) {
   // Draw facial mask on overlay canvas:
@@ -384,11 +386,11 @@ function fitModel() {
   });
 }
 
-$('#train').click(function() {
+// $('#train').click(function() {
   //  fitModel();
   // saveModel();
    loadModel();
-});
+// });
 // async function saveModel() {
 //   const save = await currentModel.save('downloads://my-model');
 // }

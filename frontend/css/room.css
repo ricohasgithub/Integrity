@@ -1,7 +1,8 @@
 
 .camera {
-    margin-top: 2.5%;
-    margin-left: 80%;
+    position: absolute;
+    margin-top: 10vh;
+    margin-left: 70vw;
 	width: 200px;
     height: 150px;
     border-radius: 10px;
