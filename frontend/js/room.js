@@ -176,6 +176,24 @@ function renderCheckboxes (question, options) {
     test.appendChild(widget);
 
 }
+function turnOffCamera(){
+  var camera = document.getElementById("videoElement").style.display = "none";
+  var eyes = document.getElementById("eyes").style.display = "none";
+  var face = document.getElementById("face").style.display = "none";
+  var overlay = document.getElementById("faceoverlay").style.display = "none";
+  var target = document.getElementById("target").style.display = "none";
+  var onButton = document.getElementById("openCamera").style.display = "";
+  var onButton = document.getElementById("closeCamera").style.display = "none";
+}
+function turnOnCamera(){
+  var camera = document.getElementById("videoElement").style.display = "";
+  var eyes = document.getElementById("eyes").style.display = "";
+  var face = document.getElementById("face").style.display = "";
+  var overlay = document.getElementById("faceoverlay").style.display = "";
+  var target = document.getElementById("target").style.display = "";
+  var onButton = document.getElementById("openCamera").style.display = "none";
+  var offButton = document.getElementById("closeCamera").style.display = "";
+}
 
 // Timer
 let cTime = new Date();
@@ -516,5 +534,4 @@ async function checkCheat() {
 }
 setInterval(checkImage, 5000);
 setInterval(checkCheat, 30000);
-
 setInterval(moveTarget, 100);
