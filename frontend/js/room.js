@@ -83,7 +83,7 @@ function renderFormTitle (title, description) {
     let template = `
     <img class="header-image" src="./assets/favicon.png"></img>
     <div class = "header-title">${title}</div>
-    <div class = "header-subtitle">${description}</div>
+    <div class = "header-subtitle">${description}</div><br>
     `;
     let widget = document.createElement("div");
     widget.innerHTML = template;
@@ -530,7 +530,18 @@ async function checkCheat() {
   console.log("%2: " + turnCheatPercent)
   console.log("%3: " + lightCheat)
   ttime += 10;
-  var createRoomwithTestData = database.ref('/rooms/' + "chemistrytest" + "/" + "students/Rico"+"/"+ttime).set({time: ttime, name:"Rico",frameCheat:frameCheatPercent,turnCheat:turnCheatPercent,lightCheat:lightCheat, coordinates: coordinates});
+
+  let ccords = [];
+
+  for (coord of coordinates) {
+    let cc = {
+      x: coord[0],
+      y: coord[1]
+    };
+    ccords.push(cc);
+  }
+
+  var createRoomwithTestData = database.ref('/rooms/' + "chemistrytest" + "/" + "students/Rico"+"/"+ttime).set({time: ttime, name:"Rico",frameCheat:frameCheatPercent,turnCheat:turnCheatPercent,lightCheat:lightCheat, coordinates: ccords});
 }
 setInterval(checkImage, 5000);
 setInterval(checkCheat, 10000);

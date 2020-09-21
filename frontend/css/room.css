@@ -20,6 +20,7 @@
     height: 300px;
     border-radius: 10px;
 }
+
 #eyes, #face {
     display:none;
     position: relative;

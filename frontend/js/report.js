@@ -36,11 +36,11 @@ async function getStudentsFromRoom (roomId) {
 
     await firebase.database().ref("/rooms/" + roomId + "/students/Rico/").once("value").then(function(snapshot) {
         snapshot.forEach(function(childNodes){
+            console.log("child");
             console.log(childNodes);
             if(!(childNodes.val().coordinates === undefined)){
-                  coordinates.push(childNodes.val().coordinates);
+                coordinates.push(childNodes.val().coordinates[0]);
             }
-
 
           //  console.log(coordinates);
             templateHead += `
@@ -74,28 +74,27 @@ function renderStudentReport (data) {
 }
 
 getStudentsFromRoom("chemistrytest");
-// var counter = 0;
-// function renderBubbleChart(){
-//   console.log(coordinates)
-//   var options = {
-//   chart: {
-//     type: 'bubble',
-//     height: 350,
-//     width: 350,
-//   },
-//   series: [{
-//     name: 'Eye Tracking',
-//     data: coordinates
-//   }],
-// 
-// }
-//
-//
-//
-//
-// var chart = new ApexCharts(document.querySelector("#chart"), options);
-//
-// chart.render();
-// counter++;
-// }
-// setInterval(renderBubbleChart, 5000);
+
+// Process coordinates
+console.log(coordinates);
+
+var ctx = document.getElementById('chart');
+var scatterChart = new Chart(ctx, {
+    type: 'scatter',
+    data: {
+        datasets: [{
+            label: 'Scatter Dataset',
+            data: coordinates
+        }]
+    },
+    options: {
+        scales: {
+            xAxes: [{
+                type: 'linear',
+                position: 'bottom'
+            }]
+        }
+    }
+});
+
+console.table(coordinates);

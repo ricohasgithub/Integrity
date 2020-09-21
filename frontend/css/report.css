@@ -24,6 +24,14 @@
     margin-left: 15vh;
 }
 
+#chart {
+    width: 50vh;
+    height: 50vh;
+    position:absolute; 
+    margin-top:5%; 
+    margin-left:0%;
+}
+
 html {
     background-color: rgb(234, 228, 204);
     overflow-x: hidden;
